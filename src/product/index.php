@@ -1,36 +1,54 @@
 <?php
-$products = [
-  [1, "ショートケーキ", 400],
-  [2, "チョコケーキ", 450],
-  [3, "モンブラン", 500],
-]; ?>
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+require_once 'init.php';
+
+$pdo = db();
+$sql = "SELECT fd.id, fd.name, fd.price, fc.category_name
+  FROM fwd_products fd, fwd_categories fc
+  WHERE fd.category_id = fc.category_id
+    and is_active = :is_active
+    and fd.category_id is not null
+  ORDER BY fc.category_id, fd.id";
+
+$is_active = TRUE;
+$statement = $pdo->prepare($sql);
+$statement->bindParam(':is_active', $is_active, PDO::PARAM_INT);
+$statement->execute();
+$products = $statement->fetchAll();
+
+?>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>商品一覧</title>
-  </head>
-  <body>
-    <h1>商品一覧</h1>
-    <table>
-      <thead>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>商品一覧</title>
+</head>
+
+<body>
+  <h1>商品一覧</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>商品名</th>
+        <th>価格</th>
+        <th>詳細</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($products as $product): ?>
         <tr>
-          <th>ID</th>
-          <th>商品名</th>
-          <th>価格</th>
-          <th>詳細</th>
+          <td><?= $product["id"] ?></th>
+          <td><?= $product["name"] ?></td>
+          <td><?= $product["price"] ?></td>
+          <td><a href="/product/detail.php?id=<?= $product["id"] ?>">詳細</a></td>
         </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($products as $product): ?>
-        <tr>
-          <td><?= $product[0] ?></th>
-          <td><?= $product[1] ?></td>
-          <td><?= $product[2] ?></td>
-          <td><a href="/product/detail.php?id=<?= $product[0] ?>">詳細</a></td>
-        </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
-  </body>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+</body>
+
 </html>
