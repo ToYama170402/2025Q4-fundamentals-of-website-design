@@ -36,7 +36,7 @@ $products = $statement->fetchAll();
 <body>
   <h1>商品一覧(ログイン中)</h1>
   <p>ようこそ、<?= h($_SESSION['display_name'] ?: $_SESSION['username']) ?>さん</p>
-  <p><a href="logout.php">ログアウト</a></p>
+  <p><a href="/logout.php">ログアウト</a></p>
   <table>
     <thead>
       <tr>
