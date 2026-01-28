@@ -16,3 +16,8 @@ function db(): PDO
     exit("DB接続に失敗しました：" . $e->getMessage());
   }
 }
+
+function h(string $str): string
+{
+  return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
+}

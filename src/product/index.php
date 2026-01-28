@@ -41,9 +41,9 @@ $products = $statement->fetchAll();
     <tbody>
       <?php foreach ($products as $product): ?>
         <tr>
-          <td><?= $product["id"] ?></th>
-          <td><?= $product["name"] ?></td>
-          <td><?= $product["price"] ?></td>
+          <td><?= h($product["id"]) ?></th>
+          <td><?= h($product["name"]) ?></td>
+          <td><?= h($product["price"]) ?></td>
           <td><a href="/product/detail.php?id=<?= $product["id"] ?>">詳細</a></td>
         </tr>
       <?php endforeach; ?>

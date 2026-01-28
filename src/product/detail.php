@@ -30,8 +30,8 @@ $current_product = $products[0]
     <p>ごめんね</p>
     <p>にゃーん</p>
   <?php else: ?>
-    <h1><?= $current_product["name"] ?></h1>
-    <p>¥<?= $current_product["price"] ?></p>
+    <h1><?= h($current_product["name"]) ?></h1>
+    <p>¥<?= h($current_product["price"]) ?></p>
   <?php endif; ?>
 </body>
 
