@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 
 session_start();
 if (empty($_SESSION['user_id'])) {
-  header('Location: /login.php');
+  header('Location: /login.html');
   exit;
 }
 
@@ -39,6 +39,7 @@ $current_product = $products[0]
     <h1><?= h($current_product["name"]) ?></h1>
     <p>¥<?= h($current_product["price"]) ?></p>
   <?php endif; ?>
+  <a href="/product">商品一覧</a>
 </body>
 
 </html>
