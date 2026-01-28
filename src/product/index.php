@@ -26,7 +26,7 @@ $products = $statement->fetchAll();
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -52,7 +52,7 @@ $products = $statement->fetchAll();
           <td><?= h($product["id"]) ?></th>
           <td><?= h($product["name"]) ?></td>
           <td><?= h($product["price"]) ?></td>
-          <td><a href="/product/detail.php?id=<?= $product["id"] ?>">詳細</a></td>
+          <td><a href="/product/detail.php?id=<?= h($product["id"]) ?>">詳細</a></td>
         </tr>
       <?php endforeach; ?>
     </tbody>

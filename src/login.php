@@ -37,7 +37,7 @@ if ($user && password_verify($input_password, $user['password'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
 
 <head>
   <meta charset="UTF-8">
