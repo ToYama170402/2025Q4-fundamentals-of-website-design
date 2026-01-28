@@ -4,6 +4,12 @@ error_reporting(E_ALL);
 
 require_once 'init.php';
 
+session_start();
+if (empty($_SESSION['user_id'])) {
+  header('Location: /login.php');
+  exit;
+}
+
 $pdo = db();
 $sql = "SELECT fd.id, fd.name, fd.price, fc.category_name
   FROM fwd_products fd, fwd_categories fc
@@ -28,7 +34,9 @@ $products = $statement->fetchAll();
 </head>
 
 <body>
-  <h1>商品一覧</h1>
+  <h1>商品一覧(ログイン中)</h1>
+  <p>ようこそ、<?= h($_SESSION['display_name'] ?: $_SESSION['username']) ?>さん</p>
+  <p><a href="logout.php">ログアウト</a></p>
   <table>
     <thead>
       <tr>

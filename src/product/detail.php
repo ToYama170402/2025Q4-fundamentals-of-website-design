@@ -2,6 +2,12 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+session_start();
+if (empty($_SESSION['user_id'])) {
+  header('Location: /login.php');
+  exit;
+}
+
 require_once 'init.php';
 $pdo = db();
 $sql = "SELECT id, name, price
